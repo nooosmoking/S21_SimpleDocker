@@ -1,0 +1,8 @@
+FROM nginx
+USER root
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./miniserver.c /home/miniserver.c
+COPY ./entrypoint.sh /home/entrypoint.sh
+RUN apt update && apt install -y gcc spawn-fcgi libfcgi-dev
+WORKDIR /home/
+CMD ["/home/entrypoint.sh"]
